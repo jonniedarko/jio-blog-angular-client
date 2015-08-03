@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="large-6 large-centered columns">
+        <div class="signup-panel">
+            <p class="welcome"> Welcome</p>
+            <form>
+                <div class="row collapse">
+                    <div class="small-12  columns">
+                        <input type="text" ng-model="signUpView.name" placeholder="name">
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-12  columns">
+                        <input type="text" ng-model="signUpView.email" placeholder="email">
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-12 columns ">
+                        <input type="password" ng-model="signUpView.password" placeholder="password">
+                    </div>
+                </div>
+            </form>
+            <a ng-click="signUpView.signUp()" class="button ">Sign Up! </a>
+            <p>Already have an account? <a href="/login">Login here &raquo</a></p>
+        </div>
+    </div>
+</div>

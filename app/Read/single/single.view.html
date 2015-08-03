@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="large-9 columns" role="content">
+        <article>
+
+            <h3><a href="#">{{blog.post.title}}</a></h3>
+            <h6>Written by <a href="#">{{blog.post.author}}</a> {{blog.post.created_at}}</h6>
+
+            <div class="row">
+                <div class="large-6 columns" ng-bind-html="blog.post.content | unsafe">
+
+                </div>
+                <div class="large-6 columns">
+                    <img src="http://placehold.it/400x240&text=[img]"/>
+                </div>
+            </div>
+
+
+        </article>
+    </div>
+    <aside class="large-3 columns">
+
+        <h5>Categories</h5>
+        <ul class="side-nav">
+            <li><a href="#">News</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Fun</a></li>
+            <li><a href="#">Weasels</a></li>
+        </ul>
+
+        <div class="panel">
+            <h5>Featured</h5>
+
+            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon
+                nulla pork belly cupidatat meatloaf cow.</p>
+            <a href="#">Read More →</a>
+        </div>
+
+    </aside>
+
+</div>

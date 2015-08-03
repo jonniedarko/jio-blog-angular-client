@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="large-6 large-centered columns">
+        <div class="signup-panel">
+            <p class="welcome"> Sign In</p>
+            <form>
+                <div class="row collapse">
+                    <div class="small-12  columns">
+                        <input type="text" ng-model="loginView.email" placeholder="email">
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-12 columns ">
+                        <input type="text" ng-model="loginView.password" placeholder="password">
+                    </div>
+                </div>
+            </form>
+            <a ng-click="loginView.login()" class="button ">Log in </a>
+            <p>Don't have an account? <a href="/signup">sign up here &raquo</a></p>
+        </div>
+    </div>
+</div>

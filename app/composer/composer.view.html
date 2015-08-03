@@ -1,0 +1,7 @@
+<div class="large-9 columns" role="content">
+    <input ng-model="composer.post.title" placeholder="Title">
+   <textarea style="height: 572px;" ng-model="composer.post.content"></textarea>
+    <button ng-hide="composer.post._id" ng-click="composer.save()">Save</button>
+    <button ng-show="composer.post._id" ng-click="composer.save()">Update</button>
+
+</div>

@@ -1,0 +1,100 @@
+/** {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    font-size: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    /!* make sure we use the full width but allow for more height *!/
+    width: 100%;
+    min-height: 100%; /!* this helps with the sticky footer *!/
+
+}
+
+/!* ----- Temp for guidance -- *!/
+header {
+    background-color: red;
+    color:white;
+    height:50px;
+    display: flex;
+    flex-flow: row;
+}
+header.fixed-top {
+    position:fixed;
+    width:100%;
+    top:0;
+}
+main {
+    display: flex;
+    flex-flow: row;
+    flex-grow: 1;
+    flex-shrink: 0;
+    outline: blue solid thin;
+    margin-top: 50px;
+    padding: 20px;
+
+}
+
+main > nav {
+    outline: blue solid thin;
+    flex: 1 6 20%;
+    order: 1;
+}
+main > content {
+    outline: black solid thin;
+    flex: 3 1 60%;
+    order: 0;
+}
+footer{
+    flex-shrink: 0;
+    height: 50px;
+    outline: purple solid thin;
+}*/
+
+.login-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin: 100px 0;
+    padding: 40px 20px 0 20px;
+}
+
+.signup-panel {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.signup-panel i {
+    font-size: 30px;
+    line-height: 50px;
+    color: #999;
+}
+
+.signup-panel form input, .signup-panel form span {
+    height: 50px;
+}
+
+.signup-panel .welcome {
+    font-size: 26px;
+    text-align: center;
+    margin-left: 0;
+}
+
+.signup-panel p {
+    font-size: 13px;
+    font-weight: 200;
+    margin-left: 25%;
+}
+
+.signup-panel .button {
+    margin-left: 35%;
+}

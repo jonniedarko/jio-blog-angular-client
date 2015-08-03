@@ -1,0 +1,54 @@
+<div class="row">
+
+<div class="large-12 columns" role="content">
+    <div ng-repeat="post in blogList.posts track by $index">
+        <article>
+
+            <h3><a ng-href="blog/{{post.titleUrl}}">{{post.title}}</a></h3>
+            <h6>Written by <a href="#">{{post.author}}</a> {{post.created_at}}</h6>
+
+            <div class="row">
+                <div class="large-8 columns" ng-bind-html="post.content | unsafe">
+
+                </div>
+                <div class="large-4 columns">
+                    <img src="http://placehold.it/400x240&text=[img]"/>
+                </div>
+            </div>
+
+
+        </article>
+        <!-- hide the last one always, doesn't work when just 1 so hide hr if only 1 post  -->
+
+        <hr ng-hide="$last || blogList.posts.length < 1"/>
+    </div>
+</div>
+<!--<aside class="large-3 columns">
+
+    <h5>Categories</h5>
+    <ul class="side-nav">
+        <li><a href="#">News</a></li>
+        <li><a href="#">Code</a></li>
+        <li><a href="#">Design</a></li>
+        <li><a href="#">Fun</a></li>
+        <li><a href="#">Weasels</a></li>
+    </ul>
+
+    <div class="panel">
+        <h5>Featured</h5>
+
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon
+            nulla pork belly cupidatat meatloaf cow.</p>
+        <a href="#">Read More →</a>
+    </div>
+
+</aside>-->
+</div>
+<div class="row">
+    <div class="small-3 columns">
+        <a ng-show="blogList.pageNumber > 0" href="/blog?p={{blogList.previousPage}}">&lt;- Newer Posts</a>
+    </div>
+    <div class="small-3 columns">
+        <a ng-show="blogList.posts.length == 5" href="/blog?p={{blogList.nextPage }}">Older Posts -&gt;</a>
+    </div>
+</div>

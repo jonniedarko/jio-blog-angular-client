@@ -1,0 +1,32 @@
+<nav class="top-bar hide-for-small">
+    <ul class="title-area">
+        <li class="name">
+            <h1>
+                <a href="/blog" title="Foundation">MyBlog</a>
+            </h1>
+        </li>
+    </ul>
+
+    <section class="top-bar-section">
+        <ul class="right">
+            <li ng-show="navbar.isLoggedIn">
+            <a href="/create">+ New Post</a>
+
+            </li>
+            </li>
+            <li><a ng-show="!navbar.isLoggedIn" href="/signup">signup</a></li>
+            <li ng-show="!navbar.isLoggedIn">
+                <a href="/login">
+                    Log In</a>
+            </li>
+            <li ng-show="navbar.isLoggedIn" class="has-dropdown not-click">
+                <a href="">{{navbar.user.name}}</a>
+                <ul class="dropdown">
+
+                    <li><a ng-click="navbar.logout()">logout</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+</nav>
