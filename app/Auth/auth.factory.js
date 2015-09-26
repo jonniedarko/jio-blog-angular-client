@@ -1,5 +1,5 @@
 'use strict';
-var api = 'http://localhost:3300/api/users/';
+var api = this.localStorage.authApi || 'http://localhost:3300/api/users/';
 angular.module('jio-auth.authFactory', ['ngCookies'])
 	.factory('AuthenticationFactory', AuthenticationFactory)
 	.factory('UserAuthFactory', UserAuthFactory)
