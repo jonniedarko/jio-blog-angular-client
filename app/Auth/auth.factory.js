@@ -39,19 +39,6 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				email: email,
 				password: password
 			});
-			/*var deferred = $q.defer();
-			 $http.post(api + 'login', {
-			 email: email,
-			 password: password
-			 })
-			 .success(function (token) {
-			 deferred.resolve(token);
-			 })
-			 .error(function (err) {
-			 deferred.reject(err);
-			 });
-
-			 return deferred.promise;*/
 		},
 		signUp: function (name, email, password) {
 			var deferred = $q.defer();
@@ -112,5 +99,5 @@ function isLoggedIn() {
 }
 
 function getUser() {
-	return 'John M'
+	return $http.get(api + 'me');
 }

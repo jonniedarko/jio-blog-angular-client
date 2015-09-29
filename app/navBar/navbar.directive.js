@@ -35,10 +35,13 @@ function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $scope) {
 	vm.logout = function () {
 		UserAuthFactory.logout();
 	};
-	vm.user = {
-		name: 'John M',
-		imageUrl: ''
-	}
+	UserAuthFactory.getUser()
+		.success(function(data){
+			vm.user = data;
+		})
+		.error(function(err){
+			console.err(err);
+		});
 
 }
 
