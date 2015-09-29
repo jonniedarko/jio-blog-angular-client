@@ -71,7 +71,9 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 			}
 		},
 		isLoggedIn: isLoggedIn,
-		getUser: getUser
+		getUser: function getUser() {
+			return $http.get(api + 'me');
+		}
 	}
 }
 TokenInterceptor.$inject = ['$q', '$window']
@@ -98,6 +100,3 @@ function isLoggedIn() {
 	true;
 }
 
-function getUser() {
-	return $http.get(api + 'me');
-}
