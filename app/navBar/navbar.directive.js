@@ -25,22 +25,20 @@ NavBarCtrl.$inject = ['AuthenticationFactory', 'UserAuthFactory', '$scope'];
 function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $scope) {
 	var vm = this;
 	vm.isLoggedIn = AuthenticationFactory.isLoggedIn();
-
 	$scope.$on('isLogged:updated', function () {
 		console.log('test')
 		vm.isLoggedIn = AuthenticationFactory.isLoggedIn();
 
 	});
-
 	vm.logout = function () {
 		UserAuthFactory.logout();
 	};
 	UserAuthFactory.getUser()
-		.success(function(data){
+		.then(function(data){
 			vm.user = data;
 		})
-		.error(function(err){
-			console.err(err);
+		.catch(function(){
+			vm.user = null;
 		});
 
 }

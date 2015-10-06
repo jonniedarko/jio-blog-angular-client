@@ -9,10 +9,10 @@ AuthenticationFactory.$inject = ['$window', '$rootScope'];
 function AuthenticationFactory($window, $rootScope) {
 	var loggedIn = false;
 	var auth = {
-		isLoggedIn: function() {
+		isLoggedIn: function () {
 			return loggedIn;
 		},
-		setLoggedIn: function (val){
+		setLoggedIn: function (val) {
 			loggedIn = val || false;
 			$rootScope.$broadcast('isLogged:updated')
 		},
@@ -58,7 +58,7 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 
 			return deferred.promise;
 		},
-		logout: function() {
+		logout: function () {
 			console.log('logout --', AuthenticationFactory.isLogged)
 			if (AuthenticationFactory.isLoggedIn()) {
 				AuthenticationFactory.setLoggedIn();// = false;
@@ -70,16 +70,22 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				$location.path("/login");
 			}
 		},
-		isLoggedIn: isLoggedIn,
 		getUser: function getUser() {
-			return $http.get(api + 'me');
+			var deferred = $q.defer();
+
+			if (AuthenticationFactory.isLoggedIn()) {
+				$http.get(api + 'me').success(deferred.resolve, deferred.reject);
+			} else {
+				deferred.reject(null);
+			}
+			return deferred.promise;
 		}
 	}
 }
 TokenInterceptor.$inject = ['$q', '$window']
 function TokenInterceptor($q, $window) {
 	return {
-		request: function(config) {
+		request: function (config) {
 			config.headers = config.headers || {};
 			if ($window.sessionStorage.token) {
 				config.headers['X-Access-Token'] = $window.sessionStorage.token;
@@ -89,7 +95,7 @@ function TokenInterceptor($q, $window) {
 			return config || $q.when(config);
 		},
 
-		response: function(response) {
+		response: function (response) {
 			return response || $q.when(response);
 		}
 	};

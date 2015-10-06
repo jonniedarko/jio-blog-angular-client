@@ -1,63 +1,38 @@
-/** {
+/*
+ {
     margin: 0;
     padding: 0;
     border: 0;
     outline: none;
     font-size: 100%;
 }
+*/
 
 html {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
 }
 body {
-    display: flex;
-    flex-direction: column;
-    /!* make sure we use the full width but allow for more height *!/
+    margin: 0;
+    padding: 0;
     width: 100%;
-    min-height: 100%; /!* this helps with the sticky footer *!/
+    height: 100%;
 
 }
-
-/!* ----- Temp for guidance -- *!/
-header {
-    background-color: red;
-    color:white;
-    height:50px;
-    display: flex;
-    flex-flow: row;
-}
-header.fixed-top {
-    position:fixed;
-    width:100%;
-    top:0;
-}
-main {
-    display: flex;
-    flex-flow: row;
-    flex-grow: 1;
-    flex-shrink: 0;
-    outline: blue solid thin;
-    margin-top: 50px;
-    padding: 20px;
-
+#main-wrapper {
+    padding: 0 0 100px;
+    position: relative;
 }
 
-main > nav {
-    outline: blue solid thin;
-    flex: 1 6 20%;
-    order: 1;
-}
-main > content {
-    outline: black solid thin;
-    flex: 3 1 60%;
-    order: 0;
-}
 footer{
-    flex-shrink: 0;
-    height: 50px;
-    outline: purple solid thin;
-}*/
+    height:100px;
+    width:100%;
+    border: thin black;
+    position:absolute;
+    bottom: 0px;
+}
 
 .login-box {
     background: #fff;
