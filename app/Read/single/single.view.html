@@ -3,7 +3,7 @@
         <article>
 
             <h3><a href="#">{{blog.post.title}}</a></h3>
-            <h6>Written by <a href="#">{{blog.post.author}}</a> {{blog.post.created_at}}</h6>
+            <h6>Written by <a href="#">{{blog.post.user ? blog.post.user.name: blog.post.author}}</a> {{blog.post.created_at}}</h6>
 
             <div class="row">
                 <div class="large-6 columns" ng-bind-html="blog.post.content | unsafe">

@@ -5,7 +5,7 @@
         <article>
 
             <h3><a ng-href="blog/{{post.titleUrl}}">{{post.title}}</a></h3>
-            <h6>Written by <a href="#">{{post.author}}</a> {{post.created_at}}</h6>
+            <h6>Written by <a href="#">{{post.user ? post.user.name: post.author}}</a> {{post.created_at}}</h6>
 
             <div class="row">
                 <div class="large-8 columns" ng-bind-html="post.content | unsafe">
