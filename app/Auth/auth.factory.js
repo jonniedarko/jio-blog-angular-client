@@ -70,11 +70,12 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				$location.path("/login");
 			}
 		},
-		getUser: function getUser() {
+		getUser: function getUser(id) {
+			var userID = id || 'me';
 			var deferred = $q.defer();
 
 			if (AuthenticationFactory.isLoggedIn()) {
-				$http.get(api + 'me').success(deferred.resolve, deferred.reject);
+				$http.get(api + userID).success(deferred.resolve, deferred.reject);
 			} else {
 				deferred.reject(null);
 			}
