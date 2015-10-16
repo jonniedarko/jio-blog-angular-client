@@ -21,25 +21,34 @@ function NavBar() {
 		} //DOM manipulation
 	}
 }
-NavBarCtrl.$inject = ['AuthenticationFactory', 'UserAuthFactory', '$scope'];
-function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $scope) {
+NavBarCtrl.$inject = ['AuthenticationFactory', 'UserAuthFactory', '$rootScope'];
+function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $rootScope) {
 	var vm = this;
-	vm.isLoggedIn = AuthenticationFactory.isLoggedIn();
-	$scope.$on('isLogged:updated', function () {
+
+	AuthenticationFactory
+		.check()
+		.then(function (isLoggedIn) {
+			vm.isLoggedIn = isLoggedIn;//AuthenticationFactory.isLoggedIn();
+			$rootScope.$broadcast('isLogged:updated');
+		}, function (err) {
+			vm.isLoggedIn = false;
+		});
+	$rootScope.$on('isLogged:updated', function () {
 		console.log('test')
 		vm.isLoggedIn = AuthenticationFactory.isLoggedIn();
+		UserAuthFactory.getUser()
+			.then(function (data) {
+				vm.user = data;
+			})
+			.catch(function () {
+				vm.user = null;
+			});
 
 	});
 	vm.logout = function () {
 		UserAuthFactory.logout();
 	};
-	UserAuthFactory.getUser()
-		.then(function(data){
-			vm.user = data;
-		})
-		.catch(function(){
-			vm.user = null;
-		});
+
 
 }
 

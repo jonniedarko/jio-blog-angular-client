@@ -60,7 +60,7 @@ run.$inject = ['$rootScope', '$location', '$window', 'AuthenticationFactory'];
 function run($rootScope, $location, $window, AuthenticationFactory) {
 	var postLogInRoute;
 	AuthenticationFactory.check();
-	console.log('AuthenticationFactory.isLoggedIn() = ' +AuthenticationFactory.isLoggedIn());
+
 
 	$rootScope.$on('$routeChangeStart', onRouteChangeStart);
 	$rootScope.$on('$routeChangeSuccess', routeChangeSuccess);

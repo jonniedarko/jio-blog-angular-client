@@ -9,8 +9,8 @@ function AuthInterceptorConfig($httpProvider){
 	$httpProvider.interceptors.push('AuthInterceptor');
 };
 
-AuthInterceptor.$inject = ['$window','$q'];
-function AuthInterceptor($window, $q){
+AuthInterceptor.$inject = ['$location','$window','$q', '$rootScope'];
+function AuthInterceptor($location, $window, $q, $rootScope){
 	/*return {
 		'request': function (config) {
 			console.log('AuthInterceptor request');
@@ -41,6 +41,13 @@ function AuthInterceptor($window, $q){
 
 		response: function(response) {
 			return response || $q.when(response);
+		},
+		responseError: function (response) {
+			if (response.status === 401) {
+				$rootScope.$broadcast('unauthorized');
+				/*$location.path('/login')*/
+			}
+			return response;
 		}
 	};
 };

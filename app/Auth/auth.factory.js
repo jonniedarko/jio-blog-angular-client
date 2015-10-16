@@ -5,8 +5,8 @@ angular.module('jio-auth.authFactory', ['ngCookies'])
 	.factory('UserAuthFactory', UserAuthFactory)
 	.factory('TokenInterceptor', TokenInterceptor);
 
-AuthenticationFactory.$inject = ['$window', '$rootScope'];
-function AuthenticationFactory($window, $rootScope) {
+AuthenticationFactory.$inject = ['$q','$window', '$rootScope', '$http'];
+function AuthenticationFactory($q, $window, $rootScope, $http) {
 	var loggedIn = false;
 	var auth = {
 		isLoggedIn: function () {
@@ -17,12 +17,25 @@ function AuthenticationFactory($window, $rootScope) {
 			$rootScope.$broadcast('isLogged:updated')
 		},
 		check: function () {
+			var deferred = $q.defer();
+			var self = this;
+
 			if ($window.sessionStorage.token && $window.sessionStorage.user) {
-				this.setLoggedIn(true);
+				$http.get(api + 'verify')
+					.success(function (data) {
+						self.setLoggedIn(data.isLoggedIn);
+						deferred.resolve(data.isLoggedIn);
+					})
+					.error(function (err) {
+						deferred.reject(err);
+					});
 			} else {
+
 				this.setLoggedIn(false);
 				delete this.user;
+				deferred.resolve(false);
 			}
+			return deferred.promise;
 		}
 	};
 
@@ -47,12 +60,11 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				email: email,
 				password: password
 			})
-				.success(function (token) {
+				.then(function (token) {
 					deferred.resolve(token);
 
 
-				})
-				.error(function (err) {
+				}, function (err) {
 					deferred.reject(err);
 				});
 
@@ -102,8 +114,4 @@ function TokenInterceptor($q, $window) {
 	};
 }
 
-function isLoggedIn() {
-	console.log('isLogged in');
-	true;
-}
 
