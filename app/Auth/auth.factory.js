@@ -12,8 +12,12 @@ function AuthenticationFactory($q, $window, $rootScope, $http) {
 		isLoggedIn: function () {
 			return loggedIn;
 		},
-		setLoggedIn: function (val) {
+		setLoggedIn: function (val, sessionData) {
 			loggedIn = val || false;
+			if(sessionData){
+				$window.sessionStorage.token = sessionData.token;
+				$window.sessionStorage.user = sessionData.user;
+			}
 			$rootScope.$broadcast('isLogged:updated')
 		},
 		check: function () {
@@ -48,10 +52,22 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 
 	return {
 		login: function (email, password) {
-			return $http.post(api + 'login', {
+				var deferred = $q.defer();
+			 $http.post(api + 'login', {
 				email: email,
 				password: password
+			}).then(function (res) {
+				if(!res.data.user || !res.data.token){
+					deferred.reject();
+				}else{
+					AuthenticationFactory.setLoggedIn(true, res.data);
+					deferred.resolve(res);
+				}
+			}, function (err) {
+				deferred.reject(err);
 			});
+
+			return deferred.promise;
 		},
 		signUp: function (name, email, password) {
 			var deferred = $q.defer();
@@ -60,10 +76,9 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				email: email,
 				password: password
 			})
-				.then(function (token) {
-					deferred.resolve(token);
-
-
+				.then(function (res) {
+					AuthenticationFactory.setLoggedIn(true, res.data);
+					deferred.resolve();
 				}, function (err) {
 					deferred.reject(err);
 				});
@@ -71,7 +86,6 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 			return deferred.promise;
 		},
 		logout: function () {
-			console.log('logout --', AuthenticationFactory.isLogged)
 			if (AuthenticationFactory.isLoggedIn()) {
 				AuthenticationFactory.setLoggedIn();// = false;
 				delete AuthenticationFactory.user;
@@ -113,5 +127,3 @@ function TokenInterceptor($q, $window) {
 		}
 	};
 }
-
-

@@ -59,7 +59,7 @@ function config($routeProvider, $locationProvider, $httpProvider) {
 run.$inject = ['$rootScope', '$location', '$window', 'AuthenticationFactory'];
 function run($rootScope, $location, $window, AuthenticationFactory) {
 	var postLogInRoute;
-	AuthenticationFactory.check();
+	AuthenticationFactory.isLoggedIn();
 
 
 	$rootScope.$on('$routeChangeStart', onRouteChangeStart);

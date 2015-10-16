@@ -11,23 +11,6 @@ function AuthInterceptorConfig($httpProvider){
 
 AuthInterceptor.$inject = ['$location','$window','$q', '$rootScope'];
 function AuthInterceptor($location, $window, $q, $rootScope){
-	/*return {
-		'request': function (config) {
-			console.log('AuthInterceptor request');
-			config.headers = config.headers || {};
-			if ($localStorage.token) {
-				config.headers.Authorization = 'Bearer ' + $localStorage.token;
-			}
-			return config;
-		},
-		'responseError': function(response) {
-			if(response.status === 401 || response.status === 403) {
-				$location.path('/signin');
-				return $q.all(response);
-			}
-			return $q.reject(response);
-		}
-	};*/
 	return {
 		request: function(config) {
 			config.headers = config.headers || {};

@@ -25,14 +25,18 @@ NavBarCtrl.$inject = ['AuthenticationFactory', 'UserAuthFactory', '$rootScope'];
 function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $rootScope) {
 	var vm = this;
 
-	AuthenticationFactory
-		.check()
+	if(AuthenticationFactory.isLoggedIn()){
+			vm.isLoggedIn = isLoggedIn;
+	}else {
+		vm.isLoggedIn = false;
+	}
+		/*.check()
 		.then(function (isLoggedIn) {
 			vm.isLoggedIn = isLoggedIn;//AuthenticationFactory.isLoggedIn();
 			$rootScope.$broadcast('isLogged:updated');
 		}, function (err) {
 			vm.isLoggedIn = false;
-		});
+		});*/
 	$rootScope.$on('isLogged:updated', function () {
 		console.log('test')
 		vm.isLoggedIn = AuthenticationFactory.isLoggedIn();
@@ -51,4 +55,3 @@ function NavBarCtrl(AuthenticationFactory, UserAuthFactory, $rootScope) {
 
 
 }
-
