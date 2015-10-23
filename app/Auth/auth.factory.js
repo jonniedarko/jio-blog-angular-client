@@ -58,7 +58,7 @@ function UserAuthFactory($http, $q, $window, $location, AuthenticationFactory) {
 				password: password
 			}).then(function (res) {
 				if(!res.data.user || !res.data.token){
-					deferred.reject();
+					deferred.reject('err');
 				}else{
 					AuthenticationFactory.setLoggedIn(true, res.data);
 					deferred.resolve(res);

@@ -14,11 +14,20 @@ function LoginController($window,$location, UserAuthFactory, AuthenticationFacto
 			UserAuthFactory.login(email, password).then(function () {
 				$location.path('/blog');
 
-			}, function (status) {
-				alert('Oops something went wrong!');
+			}, function (error) {
+				if(error){
+					vm.error = error;
+				}
 			});
 		} else {
-			alert('Invalid credentials');
+			vm.error = {
+				email:{
+					message : '*Email is required'
+				},
+				password:{
+					message : '*Password is required'
+				}
+			}
 		}
 
 	};
